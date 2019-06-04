@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  springboot-base-rabbitmq:
+    image: springboot-base-rabbitmq
+    container_name: springboot-base-rabbitmq
+    build:
+      dockerfile: ./docker/java-config.dockerfile
+      context: .
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/sicredidb
+      - HOST_MONGODB=mongo
+    ports:
+      - "8081"
+    networks:
+      - java-docker-network
+    volumes:
+      - /home/gradle/project
+
+networks:
+  java-docker-network:
+    driver: bridge

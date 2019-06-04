@@ -1,0 +1,46 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: springboot-base-rabbitmq
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pod-springboot-base-rabbitmq
+        tier: backend
+    spec:
+      containers:
+        - name: container-springboot-base-rabbitmq
+          image: nickkborges/springboot-base-rabbitmq:v3
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          ports:
+            - containerPort: 8081
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-springboot-base-rabbitmq
+  labels:
+    app: service-springboot-base-rabbitmq
+    tier: backend
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8081
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 8083
+  selector:
+    app: pod-springboot-base-rabbitmq
+    tier: backend
