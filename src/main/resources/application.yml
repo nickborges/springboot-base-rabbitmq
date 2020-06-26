@@ -2,7 +2,7 @@ server:
   port: 8081
 spring:
   rabbitmq:
-    host: 35.199.103.64
+    host: 34.83.126.39
     port: 5672
     username: guest
     password: guest

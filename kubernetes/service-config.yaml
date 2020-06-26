@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
         - name: container-springboot-base-rabbitmq
-          image: nickkborges/springboot-base-rabbitmq:v3
+          image: nickkborges/springboot-base-rabbitmq:v4
           imagePullPolicy: IfNotPresent
           resources:
             requests:
